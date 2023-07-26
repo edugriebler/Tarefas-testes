@@ -60,11 +60,47 @@ function undraw() {
 setInterval(moveDown, 700)
 
 function moveDown() {
+    freeze()
+
     undraw()
     currentPosition += 10
     draw()
 }
 
-function feeze() {
-    if
+function freeze() {
+    if (currentShape.some(squareIndex =>
+        $gridSquares[squareIndex + currentPosition + gridWidht].classList.contains ("filled")
+        )){
+            currentShape.forEach(squareIndex => $gridSquares [squareIndex + currentPosition].classList.add("filled"))
+
+            currentPosition = 3
+            currentRotation = 0
+            randomShape = Math.floor(Math.random () * allShapes.length)
+            currentShape = allShapes[randomShape][currentRotation]
+        }
+}
+
+function moveLeft() {
+    cont isEdgelimit = currentShape.some(squareIndex => (squareIndex + currentPosition) % gridWidht == 0)
+
+    undraw()
+    currentPosition--
+    draw
+}
+
+function moveRight() {
+    undraw()
+    currentPosition++
+    draw()
+}
+
+document.addEventListener("keydown", controlKeyboard)
+
+function controlKeyboard(event) {
+    if (event.key == "ArrowLeft"){
+        moveLeft()
+    }
+    else if (event.key == "ArrowRight") {
+        moveRight()
+    } 
 }
